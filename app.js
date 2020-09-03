@@ -20,8 +20,11 @@ db.once("open", () => {
   console.log("connect success")
 })
 
+app.engine("hbs", exphbs({ defaultLayout: "main", extname: "hbs" }))
+app.set("view engine", "hbs")
+
 app.get("/", (req, res) => {
-  res.send("hello world")
+  res.render("index")
 })
 
 app.listen(port, () => {
