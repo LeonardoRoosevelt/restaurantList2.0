@@ -4,6 +4,7 @@ const port = 3000
 const exphbs = require("express-handlebars")
 const bodyParser = require("body-parser")
 const mongoose = require("mongoose")
+const Restaurant = require("./models/restaurant")
 
 mongoose.connect("mongodb://localhost/restaurant-list", {
   useNewUrlParser: true,
@@ -22,12 +23,40 @@ db.once("open", () => {
 
 app.engine("hbs", exphbs({ defaultLayout: "main", extname: "hbs" }))
 app.set("view engine", "hbs")
+app.use(bodyParser.urlencoded({ extended: true }))
 
 // setting static files==>會先去看public資料夾
 app.use(express.static("public"))
 
 app.get("/", (req, res) => {
-  res.render("index")
+  Restaurant.find()
+    .lean()
+    .then(restaurants => res.render("index", { restaurants }))
+    .catch(error => console.error(error))
+})
+
+// //querystring取得問號內容
+// app.get("/search", (req, res) => {
+//   Restaurant.find()
+//     .lean()
+//     .then()
+//     .catch(error => console.error(error))
+// })
+   
+// params
+app.get("/restaurants/:id/detail", (req, res) => {
+  const id = req.params.id
+  return Restaurant.findById(id)
+    .lean()
+    .then(restaurant => res.render("show", { restaurant }))
+    .catch(error => console.error(error))
+   
+app.get("/restaurants/:id/edit", (req, res) => {
+  const id = req.params.id
+  return Restaurant.findById(id)
+    .lean()
+    .then(restaurant => res.render("edit", { restaurant    }))
+    .catch(error => console.error(error))
 })
 
 app.listen(port, () => {
