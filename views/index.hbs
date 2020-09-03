@@ -41,10 +41,11 @@
             <div class="page pl-4 pb-3">
               <a href="/restaurants/{{this._id}}/edit">Edit</a>
               <a href="/restaurants/{{this._id}}">Detail</a>
-              <button href="/restaurants/{{this._id}}/delete" type="button" class="btn btn-danger btn-sm">Delete</button>
+              <form action="./restaurants/{{this._id}}/delete" method="post" style="display: inline;">
+                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+              </form>
             </div>
           </div>
-
         </a>
         {{/each}}
       </div>
