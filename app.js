@@ -35,13 +35,39 @@ app.get("/", (req, res) => {
     .catch(error => console.error(error))
 })
 
-// //querystring取得問號內容
-// app.get("/search", (req, res) => {
-//   Restaurant.find()
-//     .lean()
-//     .then()
-//     .catch(error => console.error(error))
-// })
+//querystring取得問號內容
+app.get("/search", (req, res) => {
+  const keyword = req.query.keyword
+  Restaurant.find()
+    .lean()
+    .then(restaurant => {
+      const searchedRestaurantList = []
+      restaurant.forEach(item => {
+        if (
+          item.name.includes(keyword) ||
+          item.category.includes(keyword) ||
+          item.name_en.toLowerCase().includes(keyword.toLowerCase())
+        ) {
+          searchedRestaurantList.push(item)
+        }
+      })
+      return res.render("index", {
+        restaurants: searchedRestaurantList,
+        keywords: keyword
+      })
+    })
+    .catch(error => console.error(error))
+  // restaurants.filter(restaurant => {
+  //   return (
+  //     restaurant.name_en
+  //       .toLowerCase()
+  //       .includes(req.query.keyword.toLowerCase()) ||
+  //     restaurant.name.includes(req.query.keyword) ||
+  //     restaurant.category.includes(req.query.keyword)
+  //   )
+  // })
+  // res.render("index", { restaurants: restaurants, keyword: req.query.keyword })
+})
 
 app.get("/restaurants/new", (req, res) => {
   return res.render("new")

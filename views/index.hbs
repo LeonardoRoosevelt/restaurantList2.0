@@ -25,7 +25,7 @@
         {{#each restaurants}}
         <a href="/restaurants/{{this._id}}" class="text-secondary">
           <div class="card mb-3">
-            <img class="card-img-top" src="{{this.image}}" alt="{{this.name}}">
+            <img class="card-img-top img-fluid" src="{{this.image}}" alt="{{this.name}}">
             <div class="card-body pl-3">
               <h6 class="card-title mb-1">{{this.name}}</h6>
 
@@ -42,7 +42,7 @@
               <a href="/restaurants/{{this._id}}/edit">Edit</a>
               <a href="/restaurants/{{this._id}}">Detail</a>
               <form action="./restaurants/{{this._id}}/delete" method="post" style="display: inline;">
-                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                <button type="submit" onClick="alert(`刪除{{this.name}}餐廳囉!!!`)" class=" btn btn-danger btn-sm">Delete</button>
               </form>
             </div>
           </div>
