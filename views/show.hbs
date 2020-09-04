@@ -37,5 +37,9 @@
       <img class="rounded mx-auto d-block mb-4 w-100" src="{{restaurant.image}}" alt="{{restaurant.name}}" style="max-width: 600px;">
     </div>
   </div>
-  <a href="/">back</a>
+  <a class=" btn btn-danger btn-sm" href="/restaurants/{{restaurant._id}}/edit">Edit</a>
+  <form action="/restaurants/{{restaurant._id}}/delete" method="post" style="display: inline;">
+    <button type="submit" onClick="alert(`刪除{{this.name}}餐廳囉!!!`)" class=" btn btn-danger btn-sm">Delete</button>
+  </form>
+  <a class=" btn btn-danger btn-sm" href="/">back</a>
 </div>
