@@ -4,11 +4,27 @@
     <div class="search-bar-inner">
       <form action="/search">
         <h4 class="mb-2">尋找餐廳：</h4>
-        <div class="input-group">
-          <input type="text" name="keyword" class="form-control" placeholder="輸入餐廳、分類" aria-label="Restaurant Name..."
-            value='{{keyword}}' aria-describedby="search-button">
-          <div class="input-group-append">
-            <button class="btn btn-major" type="submit" id="search-button"><i class="fas fa-search"></i></button>
+        <div class="row">
+          <div class="input-group col-12">
+            <input type="text" name="keyword" class="form-control" placeholder="輸入餐廳、分類" aria-label="Restaurant Name..."
+              value='{{keyword}}' aria-describedby="search-button">
+            <div class="input-group-append">
+              <button class="btn btn-major" type="submit" id="search-button"><i class="fas fa-search"></i></button>
+            </div>
+            <div class="dropdown ml-2">
+              <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+                Sort
+              </button>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" href="/sort/name/asc">店名：正序</a>
+                <a class="dropdown-item" href="/sort/name/desc">店名：反序</a>
+                <a class="dropdown-item" href="/sort/category/asc">類別：正序</a>
+                <a class="dropdown-item" href="/sort/category/desc">類別：反序</a>
+                <a class="dropdown-item" href="/sort/rating/descending">評分：由高至低</a>
+                <a class="dropdown-item" href="/sort/rating/ascending">評分：由低至高</a>
+              </div>
+            </div>
           </div>
         </div>
       </form>
@@ -19,13 +35,10 @@
 <!-- restaurant list -->
 <div class="container mt-5">
   <div class="row">
-    <div class="col-md-10 col-12 mx-auto">
-      <a href="./restaurants/new">Create</a>
-    </div>
     {{#each restaurants}}
     <div class="card-columns col-md-4">
       <a href="/restaurants/{{this._id}}" class="text-secondary">
-        <div class="card mb-3">
+        <div class="card mb-2">
           <div class="card-top">
             <img class="card-img-top img-fluid" src="{{this.image}}" alt="{{this.name}}">
           </div>
@@ -34,17 +47,30 @@
             <div class="restaurant-category mb-1">
               <i class="fas fa-utensils pr-2"></i> {{this.category}}
             </div>
-            <span class="badge badge-pill badge-danger font-weight-normal">
-              {{this.rating}}
-              <i class="fas fa-star fa-xs"></i>
-            </span>
-          </div>
-          <div class="page pl-4 pb-3">
-            <a class=" btn btn-danger btn-sm" href="/restaurants/{{this._id}}/edit">Edit</a>
-            <a class=" btn btn-danger btn-sm" href="/restaurants/{{this._id}}">Detail</a>
-            <form action="./restaurants/{{this._id}}?_method=DELETE" method="post" style="display: inline;">
-              <button type="submit" onClick="alert(`刪除{{this.name}}餐廳囉!!!`)" class=" btn btn-danger btn-sm">Delete</button>
-            </form>
+            <div class="page d-flex justify-content-between mt-2">
+              <div class="row">
+                <div class="px-2">
+                  <span class="badge badge-pill badge-danger font-weight-normal">
+                    {{this.rating}}
+                    <i class="fas fa-star fa-xs"></i>
+                  </span>
+                </div>
+              </div>
+              <div class="row">
+                <div class="pl-1">
+                  <a class=" btn btn-primary btn-sm" href="/restaurants/{{this._id}}/edit">Edit</a>
+                </div>
+                <div class="pl-1">
+                  <a class=" btn btn-success btn-sm" href="/restaurants/{{this._id}}">Detail</a>
+                </div>
+                <div class="px-1">
+                  <form action="./restaurants/{{this._id}}?_method=DELETE" method="post" style="display: inline;"
+                    onsubmit="return deleteCheckAgain()">
+                    <button type="submit" class=" btn btn-danger btn-sm">Delete</button>
+                  </form>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </a>

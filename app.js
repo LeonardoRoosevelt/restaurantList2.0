@@ -12,12 +12,13 @@ require("./config/mongoose")
 
 app.engine("hbs", exphbs({ defaultLayout: "main", extname: "hbs" }))
 app.set("view engine", "hbs")
+
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(methodOverride("_method"))
-app.use(routes)
 
 // setting static files==>會先去看public資料夾
 app.use(express.static("public"))
+app.use(routes)
 
 app.listen(port, () => {
   console.log(`listening on http://localhost:${port}`)
