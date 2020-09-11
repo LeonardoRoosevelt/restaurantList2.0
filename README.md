@@ -1,17 +1,29 @@
-# Restaurant List
+# Restaurant List 2.0
 A simple web application for lovely restaurant
 
 ## Features
 - listing restaurant from restaurant.json
 - searching restaurant by name, english name and category
 - create, edit and delete the restaurant data
-
+- sort restaurants by name, category and rating
 
 ### Searching
 type the name or category of the restaurant in search bar
 
+### Create
+click the create button to add new restaurant information
+
 ### Restaurant Details
-click the restaurant card to get more details
+click the restaurant card or detail button bellow to get more details
+
+### Restaurant Edit
+click the edit button bellow to edit the information
+
+### Restaurant Delete
+click the delete button bellow to delete the information
+
+### Sort Restaurant List
+select to sort the list by method you want
 
 ### Environment SetUp - 環境建置
 mongoDB: 3.6.0
@@ -21,6 +33,7 @@ Express: 4.17.1
 Express-Handlebars: 5.1.0
 nodemon
 body-parser: 1.19.0
+method-override: 3.0.0
 
 ### Installing - 專案安裝流程
 打開你的 terminal，Clone 此專案至本機電腦
